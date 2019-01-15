@@ -33,6 +33,5 @@
     "pump": "^3.0.0"
   },
   "dependencies": {
-    "weui": "^1.1.2"
   }
 }
