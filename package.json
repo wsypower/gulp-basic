@@ -19,6 +19,7 @@
     "gulp-babel": "^7.0.1",
     "gulp-clean-css": "^3.9.3",
     "gulp-concat": "^2.6.1",
+    "gulp-connect": "^5.7.0",
     "gulp-imagemin": "^3.4.0",
     "gulp-jshint": "^2.1.0",
     "gulp-livereload": "^3.8.1",
@@ -32,6 +33,5 @@
     "node-sass": "^4.7.2",
     "pump": "^3.0.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
