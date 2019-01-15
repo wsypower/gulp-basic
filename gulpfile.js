@@ -35,6 +35,7 @@ gulp.task('serve', ['cssFix', 'js', 'Imagemin', 'html'], function () {
   // gulp.watch("src/*.html").on('change', reload);
   gulp.watch("src/js/*.js").on('change', reload);
   gulp.watch(app.srcPath+'**/*.html',['html']).on('change', reload);
+  gulp.watch(app.srcPath+'image/**/*',['image']).on('change', reload);
 });
 
 
@@ -46,6 +47,20 @@ gulp.task('html', function () {
     app._srcPath + 'scss/**',//除了scss文件下的文件
   ])  /*src下所有目录下的所有.html文件*/
     //.pipe(gulp.dest(app.buildPath)) //gulp.dest 要把文件放到指定的目标位置
+    .pipe(gulp.dest(app.distPath))
+    .pipe(connect.reload()) //当内容发生改变时， 重新加载。
+});
+
+//定义任务 把把其他文件勿动搬入dist*/
+gulp.task('move', function () {
+  /*要操作哪些文件 确定源文件地址*/
+  gulp.src([
+    app.srcPath + '**/**',
+    app._srcPath + 'image/**',//除了scss文件下的文件
+    app._srcPath + 'scss/**',//除了scss文件下的文件
+    app._srcPath + 'js/**',//除了scss文件下的文件
+  ])  /*src下所有目录下的所有.html文件*/
+  //.pipe(gulp.dest(app.buildPath)) //gulp.dest 要把文件放到指定的目标位置
     .pipe(gulp.dest(app.distPath))
     .pipe(connect.reload()) //当内容发生改变时， 重新加载。
 });
@@ -109,9 +124,9 @@ gulp.task('es6', function () {
 
 //图片压缩
 gulp.task('Imagemin', function () {
-  gulp.src('src/img/*.{png,jpg,gif,ico}')
+  gulp.src('src/image/*.{png,jpg,gif,ico}')
     .pipe(imagemin())
-    .pipe(gulp.dest('dist/img'));
+    .pipe(gulp.dest('dist/image'));
 });
 
 gulp.task('default', ['serve']);
