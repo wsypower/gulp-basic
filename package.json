@@ -1,7 +1,7 @@
 {
   "name": "yes",
   "version": "1.0.0",
-  "description": "",
+  "description": "### 1. cnpm install",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -31,7 +31,16 @@
     "gulp-uglify": "^3.0.0",
     "jshint": "^2.9.5",
     "node-sass": "^4.7.2",
+    "open": "^0.0.5",
     "pump": "^3.0.0"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wsypower/gulp-basic.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wsypower/gulp-basic/issues"
+  },
+  "homepage": "https://github.com/wsypower/gulp-basic#readme"
 }

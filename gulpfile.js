@@ -19,7 +19,8 @@ var gulp = require('gulp'),
   pump = require('pump'),
   rename = require('gulp-rename'),
   plumber = require('gulp-plumber'),
-  connect = require('gulp-connect');
+  connect = require('gulp-connect'),
+  open = require('open');
 var $ = require('gulp-load-plugins')();
 
 var browserSync = require('browser-sync').create();
@@ -37,7 +38,33 @@ gulp.task('serve', ['cssFix', 'js', 'Imagemin', 'html'], function () {
   gulp.watch(app.srcPath+'**/*.html',['html']).on('change', reload);
   gulp.watch(app.srcPath+'image/**/*',['image']).on('change', reload);
 });
+/*同时执行多个任务 [其它任务的名称]
+ * 当前bulid时，会自动把数组当中的所有任务给执行了。
+ * */
+// gulp.task('build', ['cssFix', 'js', 'Imagemin', 'html']);
 
+
+/*定义server任务
+ * 搭建一个服务器。设置运行的构建目录
+ * */
+// gulp.task('serve', ['build'], function () {
+//   /*设置服务器*/
+//   connect.server({
+//     root: [app.buildPath],//要运行哪个目录
+//     livereload: true,  //是否热更新。
+//     port: 9999  //端口号
+//   })
+//   /*监听哪些任务*/
+//   gulp.watch("src/scss/*.scss", ['cssFix']);
+//   gulp.watch("src/js/*.js", ['js']);
+//   // gulp.watch("src/*.html").on('change', reload);
+//   gulp.watch("src/js/*.js").on('change', reload);
+//   gulp.watch(app.srcPath + '**/*.html', ['html']).on('change', reload);
+//   gulp.watch(app.srcPath + 'image/**/*', ['image']).on('change', reload);
+//
+//   //通过浏览器把指定的地址 （http://localhost:9999）打开。
+//   open('http://localhost:9999');
+// });
 
 //定义任务 把所有html文件移动另一个位置*/
 gulp.task('html', function () {
@@ -46,7 +73,7 @@ gulp.task('html', function () {
     app.srcPath + '**/*.html',
     app._srcPath + 'scss/**',//除了scss文件下的文件
   ])  /*src下所有目录下的所有.html文件*/
-    //.pipe(gulp.dest(app.buildPath)) //gulp.dest 要把文件放到指定的目标位置
+  //.pipe(gulp.dest(app.buildPath)) //gulp.dest 要把文件放到指定的目标位置
     .pipe(gulp.dest(app.distPath))
     .pipe(connect.reload()) //当内容发生改变时， 重新加载。
 });
@@ -97,7 +124,7 @@ gulp.task('js', function (cb) {
       gulp.src('./src/js/*.js'),
       sourcemaps.init(),
       // jshint(),
-      concat('static.js'),
+      // concat('static.js'),
       babel({
         presets: ['es2015']
       }),
